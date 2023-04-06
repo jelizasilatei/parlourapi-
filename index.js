@@ -1,13 +1,10 @@
-// Target our html with JavaScript
-const menu = document.querySelector('#mobile-menu');
-const menuLinks = document.querySelector('.navbar__menu');
+const jsonServer = require("json-server"); //importing json-server library
+const server = jsonServer.create();
+const router = jsonServer.router("db.json");
+const middlewares = jsonServer.defaults();
+const port = process.env.PORT || 8080; // chose port from here like 8080,3001
 
-// Display Mobile Menu
-const mobileMenu = () => {
-    menu.classList.toggle('is-active');
-    menuLinks.classList.toggle('active');
-};
+server.use(middlewares);
+server.use(router);
 
-// Add an eventistener to toggle the two classes.
-// Call the mobileMenu function
-menu.addEventListener('click', mobileMenu);
+server.listen(port);
